@@ -1,0 +1,21 @@
+{
+  "name": "movie_reviews_portal",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "engines": {
+    "node": "8.10.0"
+  }
+}
