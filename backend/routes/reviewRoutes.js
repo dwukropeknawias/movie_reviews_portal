@@ -15,25 +15,54 @@ reviewRoutes.get("/:id", function(request, response) {
     if (review) {
       response.json(review);
     } else {
-      response.status(404).send();
+      response.status(404).send("Review with id " + id + " not found.");
     }
   });
 });
 
-reviewRoutes.post("/postreq", function(request, response) {
+reviewRoutes.post("/add", function(request, response) {
   Review.create({
-    description: request.body.description
-  }).then(review => {
-    response.json(review);
-  });
+    user_id: request.body.user_id,
+    movie_id: request.body.movie_id,
+    description: request.body.description,
+    rating: request.body.rating
+  })
+    .then(review => {
+      response.json(review);
+    })
+    .catch(err => {
+      res.status(400).send("Adding new review failed");
+    });
 });
 
-reviewRoutes.delete("/:id", function(request, response) {
+reviewRoutes.put("/update/:id", function(request, response) {
+  Review.update(
+    {
+      user_id: request.body.user_id,
+      movie_id: request.body.movie_id,
+      description: request.body.description,
+      rating: request.body.rating
+    },
+    {
+      where: { id: request.params.id },
+      returning: true,
+      plain: true
+    }
+  )
+    .then(review => {
+      response.json(review);
+    })
+    .catch(err => {
+      response.status(400).send("Updating new review failed");
+    });
+});
+
+reviewRoutes.delete("/delete/:id", function(request, response) {
   let { id } = request.params;
 
   Review.findByPk(id).then(review => {
     review.destroy().then(() => {
-      response.status(204).send();
+      response.status(204).send(); //204 for successful deleting
     });
   });
 });
