@@ -7,7 +7,8 @@ module.exports = sequelize.define(
     id: {
       type: Sequelize.INTEGER(10),
       primaryKey: true,
-      allowNull: false
+      //  allowNull: false,
+      autoIncrement: true
     },
     title: {
       type: Sequelize.STRING,
@@ -47,7 +48,7 @@ module.exports = sequelize.define(
     }
   },
   {
-    tableName: "movie",
+    tableName: "movies",
     timestamps: false
   }
 );

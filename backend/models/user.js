@@ -7,7 +7,8 @@ module.exports = sequelize.define(
     id: {
       type: Sequelize.INTEGER(10),
       primaryKey: true,
-      allowNull: false
+      //  allowNull: false,
+      autoIncrement: true
     },
     username: {
       type: Sequelize.CHAR(40),

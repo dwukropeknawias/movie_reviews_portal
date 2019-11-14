@@ -7,7 +7,8 @@ module.exports = sequelize.define(
     id: {
       type: Sequelize.INTEGER(10),
       primaryKey: true,
-      allowNull: false
+      //allowNull: false,
+      autoIncrement: true
     },
     user_id: {
       type: Sequelize.INTEGER(10),
@@ -22,12 +23,12 @@ module.exports = sequelize.define(
       allowNull: true
     },
     rating: {
-      type: Sequelise.INTEGER,
+      type: Sequelize.INTEGER,
       allowNull: true
     }
   },
   {
-    tableName: "review",
+    tableName: "reviews",
     timestamps: false
   }
 );

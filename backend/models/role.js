@@ -7,7 +7,8 @@ module.exports = sequelize.define(
     id: {
       type: Sequelize.INTEGER(10),
       primaryKey: true,
-      allowNull: false
+      //allowNull: false,
+      autoIncrement: true
     },
     actor_id: {
       type: Sequelize.INTEGER(10),
@@ -23,7 +24,7 @@ module.exports = sequelize.define(
     }
   },
   {
-    tableName: "role",
+    tableName: "roles",
     timestamps: false
   }
 );
