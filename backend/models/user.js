@@ -39,7 +39,7 @@ module.exports = sequelize.define(
     }
   },
   {
-    tableName: "user",
+    tableName: "users",
     timestamps: false
   }
 );
