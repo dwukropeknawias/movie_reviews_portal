@@ -36,25 +36,31 @@ reviewRoutes.post("/add", function(request, response) {
 });
 
 reviewRoutes.put("/update/:id", function(request, response) {
-  Review.update(
-    {
-      user_id: request.body.user_id,
-      movie_id: request.body.movie_id,
-      description: request.body.description,
-      rating: request.body.rating
-    },
-    {
-      where: { id: request.params.id },
-      returning: true,
-      plain: true
-    }
-  )
-    .then(review => {
-      response.json(review);
-    })
-    .catch(err => {
-      response.status(400).send("Updating new review failed");
-    });
+  let { id } = request.params;
+  Review.findByPk(id).then(review => {
+    if (review) {
+      review
+        .update(
+          {
+            user_id: request.body.user_id,
+            movie_id: request.body.movie_id,
+            description: request.body.description,
+            rating: request.body.rating
+          },
+          {
+            where: { id: request.params.id },
+            returning: true,
+            plain: true
+          }
+        )
+        .then(review => {
+          response.json(review);
+        });
+    } else
+      response
+        .status(404)
+        .send("Review with id " + id + " is not found so cannot be updated.");
+  });
 });
 
 reviewRoutes.delete("/delete/:id", function(request, response) {
