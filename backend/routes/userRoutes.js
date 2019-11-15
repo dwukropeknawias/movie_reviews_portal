@@ -15,7 +15,7 @@ userRoutes.get("/:id", function(request, response) {
     if (user) {
       response.json(user);
     } else {
-      response.status(404).send();
+      response.status(404).send("User with id " + id + " not found.");
     }
   });
 });

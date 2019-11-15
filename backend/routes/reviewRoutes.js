@@ -74,7 +74,7 @@ reviewRoutes.delete("/delete/:id", function(request, response) {
     } else
       response
         .status(404)
-        .send("Review with id " + id + " is not found so can't be deleted.");
+        .send("Review with id " + id + " is not found so cannot be deleted.");
   });
 });
 

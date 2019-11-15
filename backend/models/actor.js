@@ -11,19 +11,19 @@ module.exports = sequelize.define(
       autoIncrement: true
     },
     first_name: {
-      type: Sequelize.STRING,
+      type: Sequelize.CHAR,
       allowNull: true
     },
     last_name: {
-      type: Sequelize.STRING,
+      type: Sequelize.CHAR,
       allowNull: true
     },
     date_of_birth: {
-      type: Sequelize.DATEONLY,
+      type: Sequelize.DATE,
       allowNull: true
     },
     description: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       allowNull: true
     }
   },

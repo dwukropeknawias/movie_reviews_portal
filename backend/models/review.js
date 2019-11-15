@@ -19,7 +19,7 @@ module.exports = sequelize.define(
       allowNull: true
     },
     description: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       allowNull: true
     },
     rating: {

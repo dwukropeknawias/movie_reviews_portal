@@ -11,7 +11,7 @@ module.exports = sequelize.define(
       autoIncrement: true
     },
     title: {
-      type: Sequelize.STRING,
+      type: Sequelize.CHAR,
       allowNull: false
     },
     year: {
@@ -23,7 +23,7 @@ module.exports = sequelize.define(
       allowNull: true
     },
     genre: {
-      type: Sequelize.STRING,
+      type: Sequelize.CHAR,
       allowNull: true
     },
     plot: {
@@ -39,11 +39,11 @@ module.exports = sequelize.define(
       allowNull: true
     },
     production: {
-      type: Sequelize.STRING,
+      type: Sequelize.CHAR,
       allowNull: true
     },
     poster: {
-      type: Sequelize.CHAR,
+      type: Sequelize.TEXT,
       allowNull: true
     }
   },
