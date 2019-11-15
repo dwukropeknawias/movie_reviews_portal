@@ -61,9 +61,14 @@ reviewRoutes.delete("/delete/:id", function(request, response) {
   let { id } = request.params;
 
   Review.findByPk(id).then(review => {
-    review.destroy().then(() => {
-      response.status(204).send(); //204 for successful deleting
-    });
+    if (review) {
+      review.destroy().then(() => {
+        response.status(204).send(); //204 for successful deleting
+      });
+    } else
+      response
+        .status(404)
+        .send("Review with id " + id + " is not found so can't be deleted.");
   });
 });
 
