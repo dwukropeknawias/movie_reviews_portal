@@ -19,7 +19,7 @@ module.exports = sequelize.define(
       allowNull: true
     },
     password: {
-      type: Sequelize.CHAR(40),
+      type: Sequelize.CHAR,
       allowNull: false
     },
     token: {
