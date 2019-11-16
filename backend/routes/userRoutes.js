@@ -2,6 +2,9 @@ const express = require("express");
 const userRoutes = express();
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const secret = "mysecret";
 
 userRoutes.get("/", function(request, response) {
   User.findAll().then(users => {
@@ -44,6 +47,44 @@ userRoutes.post("/register", function(request, response) {
               response.status(400).send("Registration failed");
             });
         });
+      });
+    }
+  });
+});
+
+userRoutes.post("/login", function(request, response) {
+  User.findOne({ where: { email: request.body.email } }).then(user => {
+    if (!user) {
+      response.status(404).send("User with that mail is not found.");
+    } else {
+      bcrypt.compare(request.body.password, user.password).then(isMatch => {
+        if (isMatch) {
+          // User matched
+          // Create JWT Payload
+          const payload = {
+            id: user.id,
+            email: user.email
+          };
+
+          // Sign token
+          jwt.sign(
+            payload,
+            secret,
+            {
+              expiresIn: 36000 // 10 h
+            },
+            (err, token) => {
+              //  response.json({
+              //    token: token
+              //  });
+              response
+                .cookie("token", token, { httpOnly: true }) // jakocookie
+                .sendStatus(200);
+            }
+          );
+        } else {
+          return response.status(400).send("Password incorrect");
+        }
       });
     }
   });
