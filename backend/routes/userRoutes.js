@@ -35,7 +35,6 @@ userRoutes.post("/register", function(request, response) {
             username: request.body.username,
             email: request.body.email,
             password: hash,
-            token: request.body.token,
             first_name: request.body.first_name,
             last_name: request.body.last_name,
             is_admin: false

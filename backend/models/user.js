@@ -22,10 +22,6 @@ module.exports = sequelize.define(
       type: Sequelize.CHAR,
       allowNull: false
     },
-    token: {
-      type: Sequelize.CHAR(255),
-      allowNull: true
-    },
     first_name: {
       type: Sequelize.CHAR(40),
       allowNull: true
