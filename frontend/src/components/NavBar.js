@@ -10,7 +10,7 @@ class NavBar extends Component {
         <Menu fixed="top" inverted>
           <Menu.Menu>
             <Dropdown
-              text="Employees Announcements"
+              text="Movies Review Portal"
               pointing
               className="link item"
             >
