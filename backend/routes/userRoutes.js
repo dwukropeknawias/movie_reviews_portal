@@ -62,7 +62,8 @@ userRoutes.post("/login", function(request, response) {
           // Create JWT Payload
           const payload = {
             id: user.id,
-            email: user.email
+            email: user.email,
+            username: user.username
           };
 
           // Sign token
