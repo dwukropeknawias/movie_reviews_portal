@@ -35,7 +35,7 @@ reviewRoutes.post("/add", function(request, response) {
     });
 });
 
-reviewRoutes.put("/update/:id", function(request, response) {
+reviewRoutes.patch("/update/:id", function(request, response) {
   let { id } = request.params;
   Review.findByPk(id).then(review => {
     if (review) {

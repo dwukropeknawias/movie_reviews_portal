@@ -34,7 +34,7 @@ photoRoutes.post("/add", function(request, response) {
     });
 });
 
-photoRoutes.put("/update/:id", function(request, response) {
+photoRoutes.patch("/update/:id", function(request, response) {
   let { id } = request.params;
   Photo.findByPk(id).then(photo => {
     if (photo) {

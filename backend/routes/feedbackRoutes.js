@@ -34,7 +34,7 @@ feedbackRoutes.post("/add", function(request, response) {
     });
 });
 
-feedbackRoutes.put("/update/:id", function(request, response) {
+feedbackRoutes.patch("/update/:id", function(request, response) {
   let { id } = request.params;
   Feedback.findByPk(id).then(feedback => {
     if (feedback) {

@@ -40,7 +40,7 @@ movieRoutes.post("/add", function(request, response) {
     });
 });
 
-movieRoutes.put("/update/:id", function(request, response) {
+movieRoutes.patch("/update/:id", function(request, response) {
   let { id } = request.params;
   Movie.findByPk(id).then(movie => {
     if (movie) {

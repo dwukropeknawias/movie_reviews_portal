@@ -35,7 +35,7 @@ directorRoutes.post("/add", function(request, response) {
     });
 });
 
-directorRoutes.put("/update/:id", function(request, response) {
+directorRoutes.patch("/update/:id", function(request, response) {
   let { id } = request.params;
   Director.findByPk(id).then(director => {
     if (director) {

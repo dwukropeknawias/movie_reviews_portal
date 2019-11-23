@@ -34,7 +34,7 @@ roleRoutes.post("/add", function(request, response) {
     });
 });
 
-roleRoutes.put("/update/:id", function(request, response) {
+roleRoutes.patch("/update/:id", function(request, response) {
   let { id } = request.params;
   Role.findByPk(id).then(role => {
     if (role) {
