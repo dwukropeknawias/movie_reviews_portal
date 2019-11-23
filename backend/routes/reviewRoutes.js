@@ -31,7 +31,7 @@ reviewRoutes.post("/add", function(request, response) {
       response.json(review);
     })
     .catch(err => {
-      res.status(400).send("Adding new review failed");
+      response.status(400).send("Adding new review failed");
     });
 });
 

@@ -73,12 +73,9 @@ userRoutes.post("/login", function(request, response) {
               expiresIn: 36000 // 10 h
             },
             (err, token) => {
-              //  response.json({
-              //    token: token
-              //  });
-              response
-                .cookie("token", token, { httpOnly: true }) // jakocookie
-                .sendStatus(200);
+              response.json({
+                token: token
+              });
             }
           );
         } else {

@@ -30,7 +30,7 @@ roleRoutes.post("/add", function(request, response) {
       response.json(role);
     })
     .catch(err => {
-      res.status(400).send("Adding new role failed");
+      response.status(400).send("Adding new role failed");
     });
 });
 

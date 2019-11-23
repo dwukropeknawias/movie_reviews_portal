@@ -23,7 +23,7 @@ module.exports = sequelize.define(
       allowNull: true
     },
     genre: {
-      type: Sequelize.CHAR,
+      type: Sequelize.TEXT,
       allowNull: true
     },
     plot: {
@@ -34,8 +34,8 @@ module.exports = sequelize.define(
       type: Sequelize.TEXT,
       allowNull: true
     },
-    box_office: {
-      type: Sequelize.INTEGER,
+    revenue: {
+      type: Sequelize.FLOAT,
       allowNull: true
     },
     production: {

@@ -28,7 +28,7 @@ movieRoutes.post("/add", function(request, response) {
     genre: request.body.genre,
     plot: request.body.plot,
     awards: request.body.awards,
-    box_office: request.body.box_office,
+    revenue: request.body.revenue,
     production: request.body.production,
     poster: request.body.poster
   })
@@ -36,7 +36,7 @@ movieRoutes.post("/add", function(request, response) {
       response.json(movie);
     })
     .catch(err => {
-      res.status(400).send("Adding new movie failed");
+      response.status(400).send("Adding new movie failed");
     });
 });
 

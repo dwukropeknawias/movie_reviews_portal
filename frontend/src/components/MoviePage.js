@@ -56,11 +56,11 @@ class MoviePage extends Component {
                   <List size="massive">
                     <List.Item content={"Title: "} />
                     <List.Item content={"Year: "} />
-                    <List.Item content={"Runtime: "} />
+                    <List.Item content={"Runtime [min]: "} />
                     <List.Item content={"Genre: "} />
                     <List.Item content={"Plot: "} />
                     <List.Item content={"Awards: "} />
-                    <List.Item content={"Box office: "} />
+                    <List.Item content={"Revenue [mln]: "} />
                     <List.Item content={"Production: "} />
                   </List>
                 </GridColumn>
@@ -72,7 +72,7 @@ class MoviePage extends Component {
                     <List.Item content={this.state.movie.genre} />
                     <List.Item content={this.state.movie.plot} />
                     <List.Item content={this.state.movie.awards} />
-                    <List.Item content={this.state.movie.box_office} />
+                    <List.Item content={this.state.movie.revenue} />
                     <List.Item content={this.state.movie.production} />
                   </List>
                 </GridColumn>

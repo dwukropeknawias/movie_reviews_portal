@@ -30,7 +30,7 @@ photoRoutes.post("/add", function(request, response) {
       response.json(photo);
     })
     .catch(err => {
-      res.status(400).send("Adding new photo failed");
+      response.status(400).send("Adding new photo failed");
     });
 });
 

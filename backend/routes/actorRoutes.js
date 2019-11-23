@@ -31,7 +31,7 @@ actorRoutes.post("/add", function(request, response) {
       response.json(actor);
     })
     .catch(err => {
-      res.status(400).send("Adding new actor failed");
+      response.status(400).send("Adding new actor failed");
     });
 });
 

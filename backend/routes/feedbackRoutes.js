@@ -30,7 +30,7 @@ feedbackRoutes.post("/add", function(request, response) {
       response.json(feedback);
     })
     .catch(err => {
-      res.status(400).send("Adding new feedback failed");
+      response.status(400).send("Adding new feedback failed");
     });
 });
 

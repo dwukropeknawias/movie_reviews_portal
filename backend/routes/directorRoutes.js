@@ -31,7 +31,7 @@ directorRoutes.post("/add", function(request, response) {
       response.json(director);
     })
     .catch(err => {
-      res.status(400).send("Adding new director failed");
+      response.status(400).send("Adding new director failed");
     });
 });
 

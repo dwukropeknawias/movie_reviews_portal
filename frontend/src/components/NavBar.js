@@ -16,10 +16,10 @@ class NavBar extends Component {
             >
               <Dropdown.Menu>
                 <Dropdown.Item as={Link} to="/">
-                  Announcements
+                  Home
                 </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/topics">
-                  Topics
+                <Dropdown.Item as={Link} to="/movies">
+                  Movies
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
