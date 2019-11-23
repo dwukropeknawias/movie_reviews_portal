@@ -9,6 +9,8 @@ import {
   Image,
   GridColumn,
   GridRow,
+  Table,
+  Item,
   List
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -45,40 +47,87 @@ class MoviePage extends Component {
         <Grid textAlign="center">
           <GridRow>
             <Segment
-              style={{ height: "40vh", width: "120vh", marginTop: "5.5em" }}
+              style={{ height: "60vh", width: "120vh", marginTop: "5.5em" }}
             >
-              <Header as="h1">Movie info</Header>
-              <Grid columns="4">
-                <GridColumn width="6" />
-                <img
-                  src={this.state.movie.poster}
-                  style={({ marginTop: "15.5em" }, { maxHeight: "200px" })}
-                />
-
-                <GridColumn width="3" textAlign="left">
-                  <List size="massive">
-                    <List.Item content={"Title: "} />
-                    <List.Item content={"Year: "} />
-                    <List.Item content={"Runtime [min]: "} />
-                    <List.Item content={"Genre: "} />
-                    <List.Item content={"Plot: "} />
-                    <List.Item content={"Awards: "} />
-                    <List.Item content={"Revenue [mln]: "} />
-                    <List.Item content={"Production: "} />
-                  </List>
-                </GridColumn>
-                <GridColumn textAlign="left">
-                  <List size="massive">
-                    <List.Item content={this.state.movie.title} />
-                    <List.Item content={this.state.movie.year} />
-                    <List.Item content={this.state.movie.runtime} />
-                    <List.Item content={this.state.movie.genre} />
-                    <List.Item content={this.state.movie.plot} />
-                    <List.Item content={this.state.movie.awards} />
-                    <List.Item content={this.state.movie.revenue} />
-                    <List.Item content={this.state.movie.production} />
-                  </List>
-                </GridColumn>
+              <Header textAlign="center" as="h1">
+                Movie info
+              </Header>
+              <Grid>
+                <Grid.Row>
+                  <Grid.Column width={8}>
+                    <Image centered src={this.state.movie.poster} />
+                  </Grid.Column>
+                  <Grid.Column width={8}>
+                    <Table basic="very" celled collapsing>
+                      <Table.Body>
+                        <Table.Row>
+                          <Table.Cell>
+                            <Header as="h4">
+                              <Header.Content>Title</Header.Content>
+                            </Header>
+                          </Table.Cell>
+                          <Table.Cell>{this.state.movie.title}</Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                          <Table.Cell>
+                            <Header as="h4">
+                              <Header.Content>Year</Header.Content>
+                            </Header>
+                          </Table.Cell>
+                          <Table.Cell>{this.state.movie.year}</Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                          <Table.Cell>
+                            <Header as="h4">
+                              <Header.Content>Runtime [min]</Header.Content>
+                            </Header>
+                          </Table.Cell>
+                          <Table.Cell>{this.state.movie.runtime}</Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                          <Table.Cell>
+                            <Header as="h4">
+                              <Header.Content>Genre</Header.Content>
+                            </Header>
+                          </Table.Cell>
+                          <Table.Cell>{this.state.movie.genre}</Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                          <Table.Cell>
+                            <Header as="h4">
+                              <Header.Content>Plot</Header.Content>
+                            </Header>
+                          </Table.Cell>
+                          <Table.Cell>{this.state.movie.plot}</Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                          <Table.Cell>
+                            <Header as="h4">
+                              <Header.Content>Awards</Header.Content>
+                            </Header>
+                          </Table.Cell>
+                          <Table.Cell>{this.state.movie.awards}</Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                          <Table.Cell>
+                            <Header as="h4">
+                              <Header.Content>Revenue [mln]</Header.Content>
+                            </Header>
+                          </Table.Cell>
+                          <Table.Cell>{this.state.movie.revenue}</Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                          <Table.Cell>
+                            <Header as="h4">
+                              <Header.Content>Production</Header.Content>
+                            </Header>
+                          </Table.Cell>
+                          <Table.Cell>{this.state.movie.production}</Table.Cell>
+                        </Table.Row>
+                      </Table.Body>
+                    </Table>
+                  </Grid.Column>
+                </Grid.Row>
               </Grid>
             </Segment>
           </GridRow>
