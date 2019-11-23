@@ -12,7 +12,6 @@ import {
   List
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import homePageLogo from "./images/HomePageLogo.png";
 
 import "./MoviePage.css";
 
@@ -51,6 +50,10 @@ class MoviePage extends Component {
               <Header as="h1">Movie info</Header>
               <Grid columns="4">
                 <GridColumn width="6" />
+                <img
+                  src={this.state.movie.poster}
+                  style={({ marginTop: "15.5em" }, { maxHeight: "200px" })}
+                />
 
                 <GridColumn width="3" textAlign="left">
                   <List size="massive">
