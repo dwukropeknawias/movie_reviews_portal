@@ -25,6 +25,11 @@ module.exports = sequelize.define(
     rating: {
       type: Sequelize.INTEGER,
       allowNull: true
+    },
+    date_of_add: {
+      type: Sequelize.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.NOW
     }
   },
   {

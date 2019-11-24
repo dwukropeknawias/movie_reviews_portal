@@ -7,6 +7,7 @@ import {
   Segment,
   Feed,
   Image,
+  Icon,
   GridColumn,
   GridRow,
   Table,
@@ -66,6 +67,28 @@ class MoviePage extends Component {
                       centered
                       src={this.state.movie.poster}
                     />
+
+                    <Grid
+                      centered
+                      style={{
+                        paddingTop: "2.5em"
+                      }}
+                    >
+                      <Grid.Column width={2}>
+                        <Icon centered name="star" size="huge" color="yellow" />
+                      </Grid.Column>
+                      <Grid.Column>
+                        <Header
+                          style={{
+                            paddingTop: "0.25em",
+                            fontSize: "45px"
+                          }}
+                          size="huge"
+                        >
+                          8.1
+                        </Header>
+                      </Grid.Column>
+                    </Grid>
                   </Grid.Column>
                   <Grid.Column width={8}>
                     <Table basic="very" celled collapsing>
