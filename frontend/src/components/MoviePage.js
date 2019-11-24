@@ -55,7 +55,17 @@ class MoviePage extends Component {
               <Grid>
                 <Grid.Row>
                   <Grid.Column width={8}>
-                    <Image centered src={this.state.movie.poster} />
+                    <Image
+                      style={{
+                        marginTop: "5.5em",
+                        border: "2px solid black",
+                        width: "182px",
+                        height: "268px",
+                        boxShadow: "0 8px 6px -6px black"
+                      }}
+                      centered
+                      src={this.state.movie.poster}
+                    />
                   </Grid.Column>
                   <Grid.Column width={8}>
                     <Table basic="very" celled collapsing>

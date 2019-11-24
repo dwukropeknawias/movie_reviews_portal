@@ -33,6 +33,17 @@ class NavBar extends Component {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            <Input
+              style={{ width: "60vh" }}
+              action={{
+                color: "black",
+                labelPosition: "left",
+                icon: "search",
+                content: "Search"
+              }}
+              placeholder="Movie Title..."
+              actionPosition="left"
+            />
           </Menu.Menu>
           <Menu.Menu position="right">
             {this.props.auth.isAuthenticated ? (
