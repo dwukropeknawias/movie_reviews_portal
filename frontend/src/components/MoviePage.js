@@ -17,11 +17,12 @@ import {
 import { Link } from "react-router-dom";
 
 import "./MoviePage.css";
+import Cast from "./Cast";
 
 class MoviePage extends Component {
   constructor(props) {
     super(props);
-    this.state = { movie: {} };
+    this.state = { movie: {}, director: {}, roles: [] };
   }
 
   componentDidMount() {
@@ -40,7 +41,37 @@ class MoviePage extends Component {
       .catch(function(error) {
         console.log(error);
       });
+
+    axios
+      .get(`/api/roles/movie/${params.MovieId}`)
+      .then(response => {
+        this.setState({
+          roles: response.data
+        });
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    axios
+      .get(`/api/directors/1`)
+      .then(response => {
+        this.setState({
+          director: response.data
+        });
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
+
+  rolesList = e => {
+    return this.state.roles.map(function(currentRole, i) {
+      return <Cast role={currentRole} key={i} />;
+    });
+  };
 
   render() {
     return (
@@ -157,6 +188,17 @@ class MoviePage extends Component {
                           </Table.Cell>
                           <Table.Cell>{this.state.movie.production}</Table.Cell>
                         </Table.Row>
+                        <Table.Row>
+                          <Table.Cell>
+                            <Header as="h4">
+                              <Header.Content>Director</Header.Content>
+                            </Header>
+                          </Table.Cell>
+                          <Table.Cell>
+                            {this.state.director.first_name}{" "}
+                            {this.state.director.last_name}
+                          </Table.Cell>
+                        </Table.Row>
                       </Table.Body>
                     </Table>
                   </Grid.Column>
@@ -164,7 +206,16 @@ class MoviePage extends Component {
               </Grid>
             </Segment>
           </GridRow>
+          <Segment style={{ width: "80vh", marginTop: "2.5em" }}>
+            <Header textAlign="left" as="h1">
+              Cast
+            </Header>
+            <div>{this.rolesList()}</div>
+          </Segment>
         </Grid>
+        <Segment style={{ height: "60vh", width: "80vh", marginTop: "2.5em" }}>
+          Placeholder
+        </Segment>
       </div>
     );
   }

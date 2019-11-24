@@ -18,7 +18,7 @@ module.exports = sequelize.define(
       type: Sequelize.INTEGER(10),
       allowNull: true
     },
-    description: {
+    name: {
       type: Sequelize.TEXT,
       allowNull: true
     }
