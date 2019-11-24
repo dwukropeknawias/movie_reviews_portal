@@ -88,12 +88,13 @@ userRoutes.post("/login", function(request, response) {
 });
 
 userRoutes.get("/acc/:username", function(request, response) {
-  let token = request.headers["authorization"];
+  let token = request.headers["authorization"] || " ";
+
   if (token.startsWith("Bearer ")) {
     // Remove Bearer from string, Postman has authentication as "bearer + token"
     token = token.slice(7, token.length);
   }
-  jwt.verify(token, secret, (err, authData) => {
+  jwt.verify(token, secret, (err, payloadData) => {
     if (err) {
       response.sendStatus(403);
     } else {
