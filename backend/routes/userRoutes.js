@@ -88,14 +88,25 @@ userRoutes.post("/login", function(request, response) {
 });
 
 userRoutes.get("/acc/:username", function(request, response) {
-  User.findOne({
-    where: { username: request.params.username },
-    attributes: ["username", "email", "first_name", "last_name"]
-  }).then(user => {
-    if (user) {
-      response.json(user);
+  let token = request.headers["authorization"];
+  if (token.startsWith("Bearer ")) {
+    // Remove Bearer from string, Postman has authentication as "bearer + token"
+    token = token.slice(7, token.length);
+  }
+  jwt.verify(token, secret, (err, authData) => {
+    if (err) {
+      response.sendStatus(403);
     } else {
-      response.status(404).send("User with that username is not found.");
+      User.findOne({
+        where: { username: request.params.username },
+        attributes: ["username", "email", "first_name", "last_name"]
+      }).then(user => {
+        if (user) {
+          response.json(user);
+        } else {
+          response.status(404).send("User with that username is not found.");
+        }
+      });
     }
   });
 });
