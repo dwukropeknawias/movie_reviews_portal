@@ -151,7 +151,14 @@ class HomePage extends Component {
                   <b>{this.state.movie1.title}</b>
                 </Header>
                 <Link to={"/movies/1"}>
-                  <Image centered src={this.state.movie1.poster} />
+                  <Image
+                    style={{
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
+                    centered
+                    src={this.state.movie1.poster}
+                  />
                 </Link>
               </Grid.Column>
               <Grid.Column>
@@ -159,7 +166,14 @@ class HomePage extends Component {
                   <b>{this.state.movie2.title}</b>
                 </Header>
                 <Link to={"/movies/2"}>
-                  <Image centered src={this.state.movie2.poster} />
+                  <Image
+                    style={{
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
+                    centered
+                    src={this.state.movie2.poster}
+                  />
                 </Link>
               </Grid.Column>
               <Grid.Column>
@@ -167,7 +181,14 @@ class HomePage extends Component {
                   <b>{this.state.movie3.title}</b>
                 </Header>
                 <Link to={"/movies/3"}>
-                  <Image centered src={this.state.movie3.poster} />
+                  <Image
+                    style={{
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
+                    centered
+                    src={this.state.movie3.poster}
+                  />
                 </Link>
               </Grid.Column>
               <Grid.Column>
@@ -175,7 +196,14 @@ class HomePage extends Component {
                   <b>{this.state.movie4.title}</b>
                 </Header>
                 <Link to={"/movies/4"}>
-                  <Image centered src={this.state.movie4.poster} />
+                  <Image
+                    style={{
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
+                    centered
+                    src={this.state.movie4.poster}
+                  />
                 </Link>
               </Grid.Column>
               <Grid.Column>
@@ -183,7 +211,14 @@ class HomePage extends Component {
                   <b>{this.state.movie5.title}</b>
                 </Header>
                 <Link to={"/movies/5"}>
-                  <Image centered src={this.state.movie5.poster} />
+                  <Image
+                    style={{
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
+                    centered
+                    src={this.state.movie5.poster}
+                  />
                 </Link>
               </Grid.Column>
             </Grid.Row>
@@ -194,7 +229,14 @@ class HomePage extends Component {
                   <b>{this.state.movie6.title}</b>
                 </Header>
                 <Link to={"/movies/6"}>
-                  <Image centered src={this.state.movie6.poster} />
+                  <Image
+                    style={{
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
+                    centered
+                    src={this.state.movie6.poster}
+                  />
                 </Link>
               </Grid.Column>
               <Grid.Column>
@@ -202,7 +244,14 @@ class HomePage extends Component {
                   <b>{this.state.movie7.title}</b>
                 </Header>
                 <Link to={"/movies/7"}>
-                  <Image centered src={this.state.movie7.poster} />
+                  <Image
+                    style={{
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
+                    centered
+                    src={this.state.movie7.poster}
+                  />
                 </Link>
               </Grid.Column>
               <Grid.Column>
@@ -210,7 +259,14 @@ class HomePage extends Component {
                   <b>{this.state.movie8.title}</b>
                 </Header>
                 <Link to={"/movies/8"}>
-                  <Image centered src={this.state.movie8.poster} />
+                  <Image
+                    style={{
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
+                    centered
+                    src={this.state.movie8.poster}
+                  />
                 </Link>
               </Grid.Column>
               <Grid.Column>
@@ -218,7 +274,14 @@ class HomePage extends Component {
                   <b>{this.state.movie9.title}</b>
                 </Header>
                 <Link to={"/movies/9"}>
-                  <Image centered src={this.state.movie9.poster} />
+                  <Image
+                    style={{
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
+                    centered
+                    src={this.state.movie9.poster}
+                  />
                 </Link>
               </Grid.Column>
               <Grid.Column>
@@ -226,7 +289,14 @@ class HomePage extends Component {
                   <b>{this.state.movie10.title}</b>
                 </Header>
                 <Link to={"/movies/10"}>
-                  <Image centered src={this.state.movie10.poster} />
+                  <Image
+                    style={{
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
+                    centered
+                    src={this.state.movie10.poster}
+                  />
                 </Link>
               </Grid.Column>
             </Grid.Row>

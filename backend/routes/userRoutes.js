@@ -87,4 +87,17 @@ userRoutes.post("/login", function(request, response) {
   });
 });
 
+userRoutes.get("/acc/:username", function(request, response) {
+  User.findOne({
+    where: { username: request.params.username },
+    attributes: ["username", "email", "first_name", "last_name"]
+  }).then(user => {
+    if (user) {
+      response.json(user);
+    } else {
+      response.status(404).send("User with that username is not found.");
+    }
+  });
+});
+
 module.exports = userRoutes;
