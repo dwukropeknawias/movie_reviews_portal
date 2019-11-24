@@ -11,6 +11,9 @@ import Page404 from "./components/Page404";
 import RegistrationPage from "./components/RegistrationPage";
 import LoginPage from "./components/LoginPage";
 import MoviePage from "./components/MoviePage";
+import AccountView from "./components/AccountView";
+
+import PrivateRoute from "./components/PrivateRoute";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -53,6 +56,11 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={HomePage} />
               //{" "}
+              <PrivateRoute
+                exact
+                path="/account-view/:Username"
+                component={AccountView}
+              />
               <Route exact path="/registration" component={RegistrationPage} />
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/movies/:MovieId" component={MoviePage} />
