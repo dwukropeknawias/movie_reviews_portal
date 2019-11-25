@@ -31,7 +31,7 @@ class Review extends Component {
       isEditClicked: false,
       description: "",
       errors: {},
-      messageErrorEmpty: "",
+      descriptionErrorEmpty: "",
       open: false
     };
   }
@@ -72,11 +72,11 @@ class Review extends Component {
   validate = () => {
     let isError = false;
     const errors = {
-      messageErrorEmpty: ""
+      descriptionErrorEmpty: ""
     };
     if (this.state.description.trim() === "") {
       isError = true;
-      errors.messageErrorEmpty = "Message cannot be empty";
+      errors.descriptionErrorEmpty = "description cannot be empty";
     }
 
     if (isError) {
@@ -89,7 +89,7 @@ class Review extends Component {
   EditIsClicked() {
     this.setState({ isEditClicked: !this.state.isEditClicked });
     axios
-      .get(`/api/reviews/${this.props.review._id}`)
+      .get(`/api/reviews/${this.props.review.id}`)
       .then(response => {
         this.setState({
           description: response.data.description
@@ -109,7 +109,7 @@ class Review extends Component {
       };
 
       axios
-        .post(`/api/reviews/update/${this.props.review._id}`, updObj)
+        .patch(`/api/reviews/update/${this.props.review.id}`, updObj)
         .then(data => {
           alert("Review has been successfully updated ");
           this.setState({ isEditClicked: false });
@@ -128,12 +128,10 @@ class Review extends Component {
     this.close();
 
     axios
-      .post(`/api/reviews/delete/${this.props.review._id}`)
+      .delete(`/api/reviews/delete/${this.props.review.id}`)
       .then(data => {
         alert("Review has been successfully deleted");
-        this.props.commentDelete(this.props.review._id);
-
-        //this.props.getAllComments();
+        this.props.reviewDelete(this.props.review.id);
       })
       .catch(err => {
         alert("Error while deleting review");
@@ -159,10 +157,10 @@ class Review extends Component {
       >
         <Grid.Column style={{ maxWidth: 850 }}>
           <Segment style={{ width: "100%" }}>
-            {user.id === this.state.user._id || user.isAdmin ? (
+            {user.id === this.state.user.id || user.isAdmin ? (
               <>
                 <>
-                  <Button color="vk" floated="right" onClick={this.open}>
+                  <Button color="grey" floated="right" onClick={this.open}>
                     Delete
                   </Button>
                   <Confirm
@@ -172,7 +170,7 @@ class Review extends Component {
                   />
                 </>
                 <Button
-                  color="vk"
+                  color="grey"
                   floated="right"
                   onClick={() => this.EditIsClicked()}
                 >
@@ -203,7 +201,7 @@ class Review extends Component {
                         />
                       </Feed.Date>
                       <div class="errorsColor">
-                        {this.state.messageErrorEmpty}
+                        {this.state.descriptionErrorEmpty}
                       </div>
                       <TextArea
                         id="description"

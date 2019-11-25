@@ -42,6 +42,14 @@ class MoviePage extends Component {
       });
   };
 
+  reviewDelete = id => {
+    this.setState({
+      reviews: this.state.reviews.filter(function(review) {
+        return review._id !== id;
+      })
+    });
+  };
+
   componentDidMount() {
     const {
       match: { params }
@@ -94,7 +102,13 @@ class MoviePage extends Component {
   reviewList() {
     let self = this;
     return this.state.reviews.map(function(currentReview, i) {
-      return <Review review={currentReview} key={i} />;
+      return (
+        <Review
+          reviewDelete={self.reviewDelete}
+          review={currentReview}
+          key={i}
+        />
+      );
     });
   }
 
