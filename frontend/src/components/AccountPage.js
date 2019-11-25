@@ -92,7 +92,12 @@ class AccountPage extends Component {
                     src={this.state.user.avatar}
                     alt="upload"
                     className="process__image"
-                    style={({ maxHeight: "20em" }, { maxWidth: "20em" })}
+                    style={{
+                      maxHeight: "20em",
+                      maxWidth: "20em",
+                      border: "2px solid black",
+                      boxShadow: "0 8px 6px -6px black"
+                    }}
                   />
                 </div>
               </div>
