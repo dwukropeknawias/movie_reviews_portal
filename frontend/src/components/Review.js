@@ -7,6 +7,8 @@ import {
   Button,
   TextArea,
   Form,
+  Header,
+  Icon,
   Confirm
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -30,6 +32,7 @@ class Review extends Component {
       user: {},
       isEditClicked: false,
       description: "",
+      rating: "",
       errors: {},
       descriptionErrorEmpty: "",
       open: false
@@ -41,7 +44,8 @@ class Review extends Component {
 
   componentDidMount() {
     this.setState({
-      description: this.props.review.description
+      description: this.props.review.description,
+      rating: this.props.review.rating
     });
     axios
       .get(`/api/users/${this.props.review.user_id}`)
@@ -56,7 +60,8 @@ class Review extends Component {
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
       this.setState({
-        description: this.props.review.description
+        description: this.props.review.description,
+        rating: this.props.review.rating
       });
       axios
         .get(`/api/users/${this.props.review.user_id}`)
@@ -92,7 +97,8 @@ class Review extends Component {
       .get(`/api/reviews/${this.props.review.id}`)
       .then(response => {
         this.setState({
-          description: response.data.description
+          description: response.data.description,
+          rating: response.data.rating
         });
       })
       .catch(err => {
@@ -105,7 +111,8 @@ class Review extends Component {
 
     if (!err) {
       let updObj = {
-        description: this.state.description
+        description: this.state.description,
+        rating: this.state.rating
       };
 
       axios
@@ -200,6 +207,18 @@ class Review extends Component {
                           tooltipClassName="TooltipCssReview"
                         />
                       </Feed.Date>
+                      <TextArea
+                        id="rating"
+                        name="rating"
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          resize: "none"
+                        }}
+                        defaultValue={this.state.rating}
+                        value={this.state.rating}
+                        onChange={this.onChange}
+                      />
                       <div class="errorsColor">
                         {this.state.descriptionErrorEmpty}
                       </div>
@@ -234,7 +253,10 @@ class Review extends Component {
                         tooltipClassName="TooltipCssReview"
                       />
                     </Feed.Date>
-
+                    <Feed.Extra>
+                      <Icon name="star" color="yellow" />
+                      <span className="rating_text">{this.state.rating} </span>
+                    </Feed.Extra>
                     <Feed.Extra style={{ width: "90%" }}>
                       <div>{this.state.description}</div>
                     </Feed.Extra>
