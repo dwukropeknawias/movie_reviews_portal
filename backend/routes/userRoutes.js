@@ -125,32 +125,36 @@ userRoutes.patch("/update/:id", function(request, response) {
       if (payloadData.id != id) {
         response.sendStatus(403);
       } else {
-        User.findByPk(id).then(user => {
-          if (user) {
-            user
-              .update(
-                {
-                  first_name: request.body.first_name,
-                  last_name: request.body.last_name,
-                  password: request.body.password,
-                  avatar: request.body.avatar
-                },
-                {
-                  where: { id: request.params.id },
-                  returning: true,
-                  plain: true
-                }
-              )
-              .then(user => {
-                response.json(user);
-              });
-          } else {
-            response
-              .status(404)
-              .send(
-                "User with id " + id + " is not found so cannot be updated."
-              );
-          }
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(request.body.newPassword, salt, (err, hash) => {
+            User.findByPk(id).then(user => {
+              if (user) {
+                user
+                  .update(
+                    {
+                      first_name: request.body.first_name,
+                      last_name: request.body.last_name,
+                      password: hash,
+                      avatar: request.body.avatar
+                    },
+                    {
+                      where: { id: request.params.id },
+                      returning: true,
+                      plain: true
+                    }
+                  )
+                  .then(user => {
+                    response.json(user);
+                  });
+              } else {
+                response
+                  .status(404)
+                  .send(
+                    "User with id " + id + " is not found so cannot be updated."
+                  );
+              }
+            });
+          });
         });
       }
     }
