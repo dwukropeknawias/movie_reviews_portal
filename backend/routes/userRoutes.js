@@ -4,7 +4,7 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const secret = "mysecret";
+const secret = require("../secret");
 
 userRoutes.get("/", function(request, response) {
   User.findAll().then(users => {
@@ -69,7 +69,7 @@ userRoutes.post("/login", function(request, response) {
           // Sign token
           jwt.sign(
             payload,
-            secret,
+            secret.secretKey,
             {
               expiresIn: 36000 // 10 h
             },
@@ -94,7 +94,7 @@ userRoutes.get("/acc/:username", function(request, response) {
     // Remove Bearer from string, Postman has authentication as "bearer + token"
     token = token.slice(7, token.length);
   }
-  jwt.verify(token, secret, (err, payloadData) => {
+  jwt.verify(token, secret.secretKey, (err, payloadData) => {
     if (err) {
       response.sendStatus(403);
     } else {
@@ -117,7 +117,7 @@ userRoutes.patch("/update/:id", function(request, response) {
   if (token.startsWith("Bearer ")) {
     token = token.slice(7, token.length);
   }
-  jwt.verify(token, secret, (err, payloadData) => {
+  jwt.verify(token, secret.secretKey, (err, payloadData) => {
     if (err) {
       response.sendStatus(403);
     } else {
