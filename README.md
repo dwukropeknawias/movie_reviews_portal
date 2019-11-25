@@ -11,7 +11,7 @@ Movies review portal is a web application for posting reviews of movies. You can
 $ git clone https://github.com/dwukropeknawias/movie_reviews_portal
 
 # Go into the repository
-$ cd /movie_reviews_portal/backend
+$ cd ./movie_reviews_portal/backend
 
 # Install dependencies
 $ npm install
@@ -20,7 +20,7 @@ $ npm install
 $ npm start
 
 # Open a second console session and enter frontend repository
-$ cd /movie_reviews_portal/client
+$ cd ./movie_reviews_portal/client
 
 # Install dependencies
 $ npm install
