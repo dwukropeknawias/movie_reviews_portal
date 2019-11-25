@@ -78,4 +78,16 @@ reviewRoutes.delete("/delete/:id", function(request, response) {
   });
 });
 
+reviewRoutes.get("/movie/:id", function(request, response) {
+  Review.findAll({
+    where: { movie_id: request.params.id }
+  }).then(review => {
+    if (review) {
+      response.json(review);
+    } else {
+      response.status(404).send("Review with that movie_id is not found.");
+    }
+  });
+});
+
 module.exports = reviewRoutes;

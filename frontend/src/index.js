@@ -5,6 +5,14 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "semantic-ui-css/semantic.min.css";
 
+import JavascriptTimeAgo from "javascript-time-ago";
+
+// The desired locales.
+import en from "javascript-time-ago/locale/en";
+
+// Initialize the desired locales.
+JavascriptTimeAgo.locale(en);
+
 ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change

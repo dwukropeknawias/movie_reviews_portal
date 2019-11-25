@@ -19,11 +19,28 @@ import { Link } from "react-router-dom";
 import "./MoviePage.css";
 import Cast from "./Cast";
 
+import Review from "./Review";
+
 class MoviePage extends Component {
   constructor(props) {
     super(props);
-    this.state = { movie: {}, director: {}, roles: [] };
+    this.state = { movie: {}, director: {}, roles: [], reviews: [] };
   }
+
+  getAllReviews = () => {
+    const {
+      match: { params }
+    } = this.props;
+    axios
+      .get(`/api/reviews/movie/${params.MovieId}`)
+      .then(response => {
+        this.setState({ reviews: response.data });
+        console.log(this.state.reviews);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 
   componentDidMount() {
     const {
@@ -36,6 +53,7 @@ class MoviePage extends Component {
         this.setState({
           movie: response.data
         });
+        this.getAllReviews(this.reviews);
         console.log(response);
       })
       .catch(function(error) {
@@ -72,6 +90,13 @@ class MoviePage extends Component {
       return <Cast role={currentRole} key={i} />;
     });
   };
+
+  reviewList() {
+    let self = this;
+    return this.state.reviews.map(function(currentReview, i) {
+      return <Review review={currentReview} key={i} />;
+    });
+  }
 
   render() {
     return (
@@ -213,9 +238,11 @@ class MoviePage extends Component {
             <div>{this.rolesList()}</div>
           </Segment>
         </Grid>
-        <Segment style={{ height: "60vh", width: "80vh", marginTop: "2.5em" }}>
-          Placeholder
-        </Segment>
+
+        <div className="reviewList">
+          {" "}
+          <h1 align="center"> Reviews</h1> {this.reviewList()}
+        </div>
       </div>
     );
   }
