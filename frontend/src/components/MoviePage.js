@@ -8,6 +8,7 @@ import {
   Feed,
   Image,
   Icon,
+  Button,
   GridColumn,
   GridRow,
   Table,
@@ -21,10 +22,22 @@ import Cast from "./Cast";
 
 import Review from "./Review";
 
+import AddReview from "./AddReview";
+
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/authActions";
+
 class MoviePage extends Component {
   constructor(props) {
     super(props);
-    this.state = { movie: {}, director: {}, roles: [], reviews: [] };
+    this.state = {
+      movie: {},
+      director: {},
+      roles: [],
+      reviews: [],
+      addReviewVisible: false
+    };
   }
 
   getAllReviews = () => {
@@ -47,6 +60,12 @@ class MoviePage extends Component {
       reviews: this.state.reviews.filter(function(review) {
         return review._id !== id;
       })
+    });
+  };
+
+  buttonAddReview = () => {
+    this.setState({
+      addReviewVisible: !this.state.addReviewVisible
     });
   };
 
@@ -249,17 +268,67 @@ class MoviePage extends Component {
             <Header textAlign="left" as="h1">
               Cast
             </Header>
+
             <div>{this.rolesList()}</div>
           </Segment>
         </Grid>
 
         <div className="reviewList">
-          {" "}
-          <h1 align="center"> Reviews</h1> {this.reviewList()}
+          <div>
+            <h1 align="center"> Reviews</h1>
+          </div>
+
+          <div>
+            <div>
+              {this.props.auth.isAuthenticated ? (
+                <Button
+                  icon
+                  size="tiny"
+                  floated="left"
+                  onClick={() => this.buttonAddReview()}
+                >
+                  {this.state.addReviewVisible ? (
+                    <Icon name="minus" />
+                  ) : (
+                    <Icon name="plus" />
+                  )}
+                </Button>
+              ) : (
+                ""
+              )}
+            </div>
+            {this.props.auth.isAuthenticated ? (
+              this.state.addReviewVisible ? (
+                <AddReview
+                  movie_id={this.state.movie.id}
+                  buttonAddReview={this.buttonAddReview}
+                  getAllReviews={this.getAllReviews}
+                />
+              ) : null
+            ) : (
+              ""
+            )}
+            <span>
+              {" "}
+              <small>.</small>
+            </span>
+          </div>
+          <div>{this.reviewList()}</div>
         </div>
       </div>
     );
   }
 }
 
-export default MoviePage;
+MoviePage.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(MoviePage);
