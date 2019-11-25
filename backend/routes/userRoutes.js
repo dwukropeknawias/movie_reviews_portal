@@ -100,7 +100,7 @@ userRoutes.get("/acc/:username", function(request, response) {
     } else {
       User.findOne({
         where: { username: request.params.username },
-        attributes: ["username", "email", "first_name", "last_name"]
+        attributes: ["username", "email", "first_name", "last_name", "avatar"]
       }).then(user => {
         if (user) {
           response.json(user);

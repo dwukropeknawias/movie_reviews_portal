@@ -42,7 +42,7 @@ class AccountView extends Component {
                 <GridColumn width="6">
                   <img
                     alt="avatar"
-                    src={this.state.user.image}
+                    src={this.state.user.avatar}
                     style={{ maxHeight: "200px" }}
                   />
                 </GridColumn>
