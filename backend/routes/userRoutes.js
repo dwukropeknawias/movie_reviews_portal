@@ -112,4 +112,49 @@ userRoutes.get("/acc/:username", function(request, response) {
   });
 });
 
+userRoutes.patch("/update/:id", function(request, response) {
+  let token = request.headers["authorization"] || " ";
+  if (token.startsWith("Bearer ")) {
+    token = token.slice(7, token.length);
+  }
+  jwt.verify(token, secret, (err, payloadData) => {
+    if (err) {
+      response.sendStatus(403);
+    } else {
+      let { id } = request.params;
+      if (payloadData.id != id) {
+        response.sendStatus(403);
+      } else {
+        User.findByPk(id).then(user => {
+          if (user) {
+            user
+              .update(
+                {
+                  first_name: request.body.first_name,
+                  last_name: request.body.last_name,
+                  password: request.body.password,
+                  avatar: request.body.avatar
+                },
+                {
+                  where: { id: request.params.id },
+                  returning: true,
+                  plain: true
+                }
+              )
+              .then(user => {
+                response.json(user);
+              });
+          } else {
+            response
+              .status(404)
+              .send(
+                "User with id " + id + " is not found so cannot be updated."
+              );
+          }
+        });
+      }
+    }
+  });
+});
+
 module.exports = userRoutes;

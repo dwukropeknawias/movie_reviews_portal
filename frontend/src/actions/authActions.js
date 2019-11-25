@@ -80,7 +80,7 @@ export const getUser = id => {
 //Modify user's first or/and last name
 export const changeName = userData => {
   axios
-    .post("api/users/update/name/${userData.id}", userData)
+    .post("api/users/update/${userData.id}", userData)
     .then()
     .catch(err => {
       console.log(err);
@@ -90,7 +90,7 @@ export const changeName = userData => {
 //Modify user's password
 export const changePassword = userData => {
   axios
-    .post("api/users/update/password/${userData.id}", userData)
+    .post("api/users/update/${userData.id}", userData)
     .then()
     .catch(err => {
       console.log(err);
