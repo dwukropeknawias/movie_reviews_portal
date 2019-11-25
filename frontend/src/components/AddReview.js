@@ -133,7 +133,7 @@ class AddReview extends Component {
                 </Form>
                 <Button
                   style={{ marginTop: "1em" }}
-                  color="vk"
+                  color="grey"
                   fluid
                   size="large"
                 >

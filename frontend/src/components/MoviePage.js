@@ -275,28 +275,30 @@ class MoviePage extends Component {
 
         <div className="reviewList">
           <div>
-            <h1 align="center"> Reviews</h1>
+            <Header textAlign="center" size="large">
+              {" "}
+              Reviews
+            </Header>
           </div>
+          {this.props.auth.isAuthenticated ? (
+            <Button
+              icon
+              color="grey"
+              size="mini"
+              style={{ marginLeft: "46.5em" }}
+              onClick={() => this.buttonAddReview()}
+            >
+              {this.state.addReviewVisible ? (
+                <Icon name="minus" />
+              ) : (
+                <Icon name="plus" />
+              )}
+            </Button>
+          ) : (
+            ""
+          )}
 
           <div>
-            <div>
-              {this.props.auth.isAuthenticated ? (
-                <Button
-                  icon
-                  size="tiny"
-                  floated="left"
-                  onClick={() => this.buttonAddReview()}
-                >
-                  {this.state.addReviewVisible ? (
-                    <Icon name="minus" />
-                  ) : (
-                    <Icon name="plus" />
-                  )}
-                </Button>
-              ) : (
-                ""
-              )}
-            </div>
             {this.props.auth.isAuthenticated ? (
               this.state.addReviewVisible ? (
                 <AddReview
