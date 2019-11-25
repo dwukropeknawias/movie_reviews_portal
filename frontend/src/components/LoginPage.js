@@ -138,11 +138,6 @@ class LoginPage extends Component {
                 </div>
 
                 <Form.Input
-                  error={
-                    this.state.emailErrorEmpty ||
-                    this.state.emailErrorWhitespaces ||
-                    errors.emailnotfound
-                  }
                   fluid
                   icon="mail"
                   iconPosition="left"
@@ -172,11 +167,6 @@ class LoginPage extends Component {
                 </div>
 
                 <Form.Input
-                  error={
-                    this.state.passwordErrorEmpty ||
-                    this.state.passwordErrorWhitespaces ||
-                    errors.passwordincorrect
-                  }
                   fluid
                   icon="lock"
                   iconPosition="left"

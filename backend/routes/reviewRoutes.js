@@ -53,29 +53,46 @@ reviewRoutes.post("/add", function(request, response) {
 
 reviewRoutes.patch("/update/:id", function(request, response) {
   let { id } = request.params;
-  Review.findByPk(id).then(review => {
-    if (review) {
-      review
-        .update(
-          {
-            user_id: request.body.user_id,
-            movie_id: request.body.movie_id,
-            description: request.body.description,
-            rating: request.body.rating
-          },
-          {
-            where: { id: request.params.id },
-            returning: true,
-            plain: true
-          }
-        )
-        .then(review => {
-          response.json(review);
-        });
-    } else
-      response
-        .status(404)
-        .send("Review with id " + id + " is not found so cannot be updated.");
+  let token = request.headers["authorization"] || " ";
+  if (token.startsWith("Bearer ")) {
+    // Remove Bearer from string, Postman has authentication as "bearer + token"
+    token = token.slice(7, token.length);
+  }
+  jwt.verify(token, secret.secretKey, (err, payloadData) => {
+    if (err) {
+      response.sendStatus(403);
+    } else {
+      Review.findByPk(id).then(review => {
+        if (review && payloadData.id != review.user_id) {
+          response.sendStatus(403);
+        } else {
+          if (review) {
+            review
+              .update(
+                {
+                  user_id: request.body.user_id,
+                  movie_id: request.body.movie_id,
+                  description: request.body.description,
+                  rating: request.body.rating
+                },
+                {
+                  where: { id: request.params.id },
+                  returning: true,
+                  plain: true
+                }
+              )
+              .then(review => {
+                response.json(review);
+              });
+          } else
+            response
+              .status(404)
+              .send(
+                "Review with id " + id + " is not found so cannot be updated."
+              );
+        }
+      });
+    }
   });
 });
 
