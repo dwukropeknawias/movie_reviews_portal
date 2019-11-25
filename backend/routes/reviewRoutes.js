@@ -81,16 +81,32 @@ reviewRoutes.patch("/update/:id", function(request, response) {
 
 reviewRoutes.delete("/delete/:id", function(request, response) {
   let { id } = request.params;
-
-  Review.findByPk(id).then(review => {
-    if (review) {
-      review.destroy().then(() => {
-        response.status(204).send(); //204 for successful deleting
+  let token = request.headers["authorization"] || " ";
+  if (token.startsWith("Bearer ")) {
+    // Remove Bearer from string, Postman has authentication as "bearer + token"
+    token = token.slice(7, token.length);
+  }
+  jwt.verify(token, secret.secretKey, (err, payloadData) => {
+    if (err) {
+      response.sendStatus(403);
+    } else {
+      Review.findByPk(id).then(review => {
+        if (review && payloadData.id != review.user_id) {
+          response.sendStatus(403);
+        } else {
+          if (review) {
+            review.destroy().then(() => {
+              response.status(204).send(); //204 for successful deleting
+            });
+          } else
+            response
+              .status(404)
+              .send(
+                "Review with id " + id + " is not found so cannot be deleted."
+              );
+        }
       });
-    } else
-      response
-        .status(404)
-        .send("Review with id " + id + " is not found so cannot be deleted.");
+    }
   });
 });
 
