@@ -1,4 +1,4 @@
-# movies_review_portal
+# Movies Review Portal
 
 ## Project information
 
