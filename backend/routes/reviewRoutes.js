@@ -139,4 +139,16 @@ reviewRoutes.get("/movie/:id", function(request, response) {
   });
 });
 
+reviewRoutes.get("/user/:id", function(request, response) {
+  Review.findAll({
+    where: { user_id: request.params.id }
+  }).then(review => {
+    if (review) {
+      response.json(review);
+    } else {
+      response.status(404).send("Review with that user_id is not found.");
+    }
+  });
+});
+
 module.exports = reviewRoutes;

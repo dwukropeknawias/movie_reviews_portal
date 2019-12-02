@@ -7,8 +7,6 @@ import {
   Button,
   TextArea,
   Form,
-  Header,
-  Icon,
   Confirm
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -23,16 +21,15 @@ import "react-time-ago/Tooltip.css";
 
 import axios from "axios";
 
-import "./Review.css";
+import "./Comment.css";
 
-class Review extends Component {
+class Comment extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: {},
       isEditClicked: false,
       description: "",
-      rating: "",
       errors: {},
       descriptionErrorEmpty: "",
       open: false
@@ -44,11 +41,10 @@ class Review extends Component {
 
   componentDidMount() {
     this.setState({
-      description: this.props.review.description,
-      rating: this.props.review.rating
+      description: this.props.comment.description
     });
     axios
-      .get(`/api/users/${this.props.review.user_id}`)
+      .get(`/api/users/${this.props.comment.user_id}`)
       .then(response => {
         this.setState({ user: response.data });
       })
@@ -60,11 +56,10 @@ class Review extends Component {
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
       this.setState({
-        description: this.props.review.description,
-        rating: this.props.review.rating
+        description: this.props.comment.description
       });
       axios
-        .get(`/api/users/${this.props.review.user_id}`)
+        .get(`/api/users/${this.props.comment.user_id}`)
         .then(response => {
           this.setState({ user: response.data });
         })
@@ -94,15 +89,14 @@ class Review extends Component {
   EditIsClicked() {
     this.setState({ isEditClicked: !this.state.isEditClicked });
     axios
-      .get(`/api/reviews/${this.props.review.id}`)
+      .get(`/api/feedbacks/${this.props.comment._id}`)
       .then(response => {
         this.setState({
-          description: response.data.description,
-          rating: response.data.rating
+          description: response.data.description
         });
       })
       .catch(err => {
-        alert("Error while getting review");
+        alert("Error while getting comment");
       });
   }
 
@@ -111,18 +105,17 @@ class Review extends Component {
 
     if (!err) {
       let updObj = {
-        description: this.state.description,
-        rating: this.state.rating
+        description: this.state.description
       };
 
       axios
-        .patch(`/api/reviews/update/${this.props.review.id}`, updObj)
+        .post(`/api/feedbacks/update/${this.props.comment._id}`, updObj)
         .then(data => {
-          alert("Review has been successfully updated ");
+          alert("Comment has been successfully updated ");
           this.setState({ isEditClicked: false });
         })
         .catch(err => {
-          alert("Error while updating review - blank field");
+          alert("Error while updating comment - blank field");
         });
     }
   };
@@ -135,13 +128,15 @@ class Review extends Component {
     this.close();
 
     axios
-      .delete(`/api/reviews/delete/${this.props.review.id}`)
+      .post(`/api/feedbacks/delete/${this.props.comment._id}`)
       .then(data => {
-        alert("Review has been successfully deleted");
-        this.props.reviewDelete(this.props.review.id);
+        alert("Comment has been successfully deleted");
+        this.props.commentDelete(this.props.comment._id);
+
+        //this.props.getAllComments();
       })
       .catch(err => {
-        alert("Error while deleting review");
+        alert("Error while deleting comment");
       });
   };
 
@@ -154,7 +149,7 @@ class Review extends Component {
     //      ", " +
     //      new Date(this.props.announcement.date_of_add).toLocaleDateString();
 
-    var date = new Date(this.props.review.date_of_add);
+    var date = new Date(this.props.comment.date_of_add);
 
     return (
       <Grid
@@ -198,27 +193,13 @@ class Review extends Component {
                     </Feed.Label>
                     <Feed.Content>
                       <Feed.Date>
-                        Added by{" "}
-                        <Link to={"/account-view/" + acc}>
-                          {this.state.user.username}
-                        </Link>{" "}
+                        Added by {this.state.user.username}
+                        <Link to={"/account-view/" + acc} />{" "}
                         <ReactTimeAgo
                           date={date}
-                          tooltipClassName="TooltipCssReview"
+                          tooltipClassName="TooltipCssComment"
                         />
                       </Feed.Date>
-                      <TextArea
-                        id="rating"
-                        name="rating"
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          resize: "none"
-                        }}
-                        defaultValue={this.state.rating}
-                        value={this.state.rating}
-                        onChange={this.onChange}
-                      />
                       <div class="errorsColor">
                         {this.state.descriptionErrorEmpty}
                       </div>
@@ -250,14 +231,10 @@ class Review extends Component {
                       </Link>{" "}
                       <ReactTimeAgo
                         date={date}
-                        tooltipClassName="TooltipCssReview"
-                      />{" "}
-                      to <Link to={"/account-view/" + acc}> Prometheus </Link>{" "}
+                        tooltipClassName="TooltipCssComment"
+                      />
                     </Feed.Date>
-                    <Feed.Extra>
-                      <Icon name="star" color="yellow" />
-                      <span className="rating_text">{this.state.rating} </span>
-                    </Feed.Extra>
+
                     <Feed.Extra style={{ width: "90%" }}>
                       <div>{this.state.description}</div>
                     </Feed.Extra>
@@ -272,7 +249,7 @@ class Review extends Component {
   }
 }
 
-Review.propTypes = {
+Comment.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
@@ -283,4 +260,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { logoutUser }
-)(Review);
+)(Comment);

@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 
 import placeholderImg from "./images/placeholder.png";
+import quilltest from "./images/plac.jpg";
 
 class Cast extends Component {
   constructor(props) {

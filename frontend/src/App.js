@@ -13,6 +13,7 @@ import LoginPage from "./components/LoginPage";
 import MoviePage from "./components/MoviePage";
 import AccountView from "./components/AccountView";
 import AccountPage from "./components/AccountPage";
+import ReviewView from "./components/ReviewView";
 
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -64,6 +65,7 @@ class App extends Component {
               />
               <Route exact path="/registration" component={RegistrationPage} />
               <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/reviews/:ReviewId" component={ReviewView} />
               <PrivateRoute exact path="/account" component={AccountPage} />
               <Route exact path="/movies/:MovieId" component={MoviePage} />
               <Route path="*" component={Page404} />

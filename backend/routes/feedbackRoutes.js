@@ -76,4 +76,16 @@ feedbackRoutes.delete("/delete/:id", function(request, response) {
   });
 });
 
+feedbackRoutes.get("/review/:id", function(request, response) {
+  Feedback.findAll({
+    where: { review_id: request.params.id }
+  }).then(feedback => {
+    if (feedback) {
+      response.json(feedback);
+    } else {
+      response.status(404).send("Feedback with that movie_id is not found.");
+    }
+  });
+});
+
 module.exports = feedbackRoutes;

@@ -21,6 +21,11 @@ module.exports = sequelize.define(
     description: {
       type: Sequelize.TEXT,
       allowNull: true
+    },
+    date_of_add: {
+      type: Sequelize.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.NOW
     }
   },
   {
